@@ -10,23 +10,29 @@ apikey = os.environ['apikey']
 url = os.environ['url']
 auth = IAMAuthenticator(apikey)
 
-translator = LanguageTranslatorV3(authenticators=auth)
+translator = LanguageTranslatorV3(
+    version='2018-05-01',
+    authenticator=auth)
 translator.set_service_url(url)
 
 
 def englishToFrench(englishText):
+    if len(englishText) == 0:
+        return None
     text = translator.translate(
         englishText,
         model_id='en-fr'
     ).get_result()
-    frenchText = json.dumps(text)
+    frenchText = text['translations'][0].get('translation')
     return frenchText
 
 
 def frenchToEnglish(frenchText):
+    if len(frenchText) == 0:
+        return None
     text = translator.translate(
         frenchText,
         model_id='fr-en'
     ).get_result()
-    englishText = json.dumps(text)
+    englishText = text['translations'][0].get('translation')
     return englishText
