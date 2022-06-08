@@ -4,7 +4,6 @@ import translator
 
 class Test(unittest.TestCase):
 
-
     def test_null_eng_to_fr(self):
         """Null input english to french"""
         self.assertIsNone(translator.englishToFrench(''))
@@ -20,7 +19,6 @@ class Test(unittest.TestCase):
     def test_fr_to_eng(self):
         """Fr-Eng Bonjour"""
         self.assertEqual('Hello', translator.frenchToEnglish('Bonjour'))
-    '''
 
 if __name__ == '__main__':
     unittest.main()
